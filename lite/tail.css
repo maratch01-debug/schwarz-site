@@ -3,6 +3,19 @@
 
 .tl { position: relative; z-index: 3; background: var(--bg); color: var(--ink); font-family: var(--font-text); line-height: 1.6; }
 .tl *, .tl *::before, .tl *::after { box-sizing: border-box; }
+/* база хвоста: модуль самодостаточен и в site-lite, и под стилями фильма site-3d.
+   :where() с нулевой специфичностью, чтобы любое правило ниже её перебивало, а UA-стили нет */
+:where(.tl, .tl-panel) :where(img, svg) { display: block; max-width: 100%; }
+:where(.tl, .tl-panel) :where(a) { color: inherit; text-decoration: none; }
+:where(.tl, .tl-panel) :where(button, input, select, textarea) { font: inherit; color: inherit; }
+:where(.tl, .tl-panel) :where(h1, h2, h3) { font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); line-height: 0.98; margin: 0; text-wrap: balance; }
+:where(.tl, .tl-panel) :where(h1, h2, h3) em { font-family: var(--font-accent); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--accent); }
+:where(.tl, .tl-panel) :where(p) { text-wrap: pretty; }
+/* у фильма свой .btn (mono, капс, фиксированная высота, вуаль ::after): в хвосте его снимаем */
+:is(.tl, .tl-panel) .btn { height: auto; justify-content: flex-start; overflow: visible; letter-spacing: -0.01em; text-transform: none; font-family: var(--font-text); line-height: 1.2; }
+:is(.tl, .tl-panel) .btn::after { content: none; }
+.tl .logo { font-weight: 600; font-size: 1.02rem; letter-spacing: 0.22em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2px; }
+.tl .logo i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-left: 6px; }
 .tl section { padding: var(--section) var(--pad); position: relative; }
 .tl .tl-wrap { max-width: var(--maxw); margin: 0 auto; }
 .tl h2 { font-size: var(--h2); max-width: 14ch; }
@@ -269,7 +282,7 @@ html[data-theme='atelier'] .tl .tl-svc.has-photo p { color: rgba(246, 242, 234, 
 .tl .tl-foot nav { display: grid; gap: 6px; }
 .tl .tl-foot a:hover { color: var(--ink); }
 .tl .tl-foot .theme-switch { margin-top: 16px; }
-.tl .tl-giant { max-width: var(--maxw); margin: clamp(3rem, 6vw, 5rem) auto 0; font-weight: 700; font-size: clamp(4rem, 19vw, 19rem); letter-spacing: -0.07em; line-height: 0.78; color: transparent; -webkit-text-stroke: 1px var(--line-strong); user-select: none; text-align: center; white-space: nowrap; }
+.tl .tl-giant { max-width: var(--maxw); margin: clamp(3rem, 6vw, 5rem) auto 0; font-weight: 700; font-size: clamp(4rem, 17vw, 17rem); letter-spacing: -0.03em; line-height: 0.78; color: transparent; background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 10%, transparent), transparent 92%); -webkit-background-clip: text; background-clip: text; user-select: none; text-align: center; white-space: nowrap; }
 .tl .tl-credits { max-width: var(--maxw); margin: 2.4rem auto 0; border-top: 1px solid var(--line); padding-top: 8px; font-size: 0.78rem; color: var(--ink-faint); }
 .tl .tl-credits summary { cursor: pointer; color: var(--ink-dim); min-height: 44px; display: flex; align-items: center; }
 .tl .tl-credits ul { columns: 2; column-gap: 32px; padding: 8px 0 0 18px; margin: 0; }
@@ -335,3 +348,10 @@ html[data-theme='atelier'] .tl .tl-svc.has-photo p { color: rgba(246, 242, 234, 
 .tl-dt { grid-template-columns: minmax(0, 1fr) 7em; }
 .tl-dt input[type='time'] { padding: 0 4px; font-size: 0.92rem; letter-spacing: 0; }
 .tl .tl-summary.is-empty { grid-template-columns: 1fr; }
+
+/* переключатель темы в футере: свой у хвоста, чтобы одинаково смотрелся в site-lite и site-3d */
+.tl .theme-switch { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid var(--line-strong); width: max-content; }
+.tl .theme-switch button { min-height: 38px; padding: 0 16px; border-radius: 999px; border: 0; background: transparent; color: var(--ink-dim); font: inherit; font-size: 0.85rem; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+.tl .theme-switch button:hover { color: var(--ink); }
+.tl .theme-switch button.is-on { background: var(--ink); color: var(--bg); }
+.tl .theme-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

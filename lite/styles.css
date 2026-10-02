@@ -123,8 +123,9 @@ html[data-theme='atelier'] .grain { opacity: 0.06; mix-blend-mode: multiply; }
 .hero-word {
   position: absolute; z-index: -2; left: 50%; top: 47%; transform: translate(-50%, -50%);
   font-weight: 700; font-size: clamp(7rem, 27vw, 30rem); letter-spacing: -0.065em; line-height: 0.8;
-  color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 13%, transparent);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 9%, transparent), transparent 82%);
+  /* без обводки: у вариативного Geist контуры H и стыки букв перекрываются, и stroke рисует их крестом */
+  color: transparent;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 11%, transparent), transparent 84%);
   -webkit-background-clip: text; background-clip: text;
   white-space: nowrap; user-select: none; pointer-events: none;
 }
