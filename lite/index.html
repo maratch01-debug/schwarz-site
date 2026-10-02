@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru" data-theme="night">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SCHWARZ. Немецкие машины в ночных цветах</title>
+  <meta name="description" content="Mercedes, BMW, Porsche, Audi в тёмных заводских цветах. 13 машин в наличии в Москве, цена и наличие открыты, выдача за три дня." />
+  <meta name="theme-color" content="#0a0d18" />
+  <meta property="og:title" content="SCHWARZ. Немецкие машины в ночных цветах" />
+  <meta property="og:description" content="13 машин в наличии в Москве. Все тёмные. Цена открыта, выдача за три дня." />
+  <meta property="og:image" content="renders/night/g900-34f.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0d18'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='19' fill='%23f5f1e8'%3ES%3C/text%3E%3Ccircle cx='25' cy='21' r='2.4' fill='%23d4a574'/%3E%3C/svg%3E" />
+  <script>
+    // тема до первой отрисовки, чтобы не мигало
+    (function () {
+      try {
+        var t = new URLSearchParams(location.search).get('theme') || localStorage.getItem('schwarz-theme')
+        if (t === 'night' || t === 'chrome' || t === 'atelier') document.documentElement.dataset.theme = t
+      } catch (e) {}
+      document.documentElement.classList.add('js')
+    })()
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700&family=Tektur:wght@500;700;800&family=Geologica:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="tail.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#catalog" class="skip">Перейти к каталогу</a>
+
+  <header class="hd" data-header>
+    <div class="hd-in">
+      <a href="#top" class="logo" aria-label="SCHWARZ, на главную">Schwarz<i></i></a>
+      <nav class="nav" aria-label="Разделы" data-nav>
+        <a href="#heroes">Машины</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#services">Услуги</a>
+        <a href="#about">О салоне</a>
+        <a href="#cta">Контакты</a>
+      </nav>
+      <div class="hd-right">
+        <div class="themes" role="group" aria-label="Освещение шоурума" data-themes>
+          <button type="button" data-theme-btn="night" aria-label="Ночной шоурум" title="Ночной шоурум"></button>
+          <button type="button" data-theme-btn="chrome" aria-label="Кинохром" title="Кинохром"></button>
+          <button type="button" data-theme-btn="atelier" aria-label="Светлое ателье" title="Светлое ателье"></button>
+        </div>
+        <a href="#cta" class="tl-btn hd-cta">Записаться</a>
+        <button type="button" class="burger" aria-label="Меню" aria-expanded="false" data-burger><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="hero-media" data-parallax>
+        <img data-render="g900" data-rview="34f" alt="Mercedes-AMG G 63 Brabus 900 в цвете Obsidian Black в шоуруме SCHWARZ" fetchpriority="high" width="1920" height="1080" />
+      </div>
+      <div class="hero-in">
+        <p class="eyebrow rise" style="--d:.1s">Москва · шоурум · <span data-count-cars>13</span> машин в наличии</p>
+        <h1 id="hero-h" class="rise" style="--d:.2s">Немецкие машины <em>в ночных цветах</em></h1>
+        <p class="lede rise" style="--d:.35s" data-text="brand.lede"></p>
+        <div class="hero-cta rise" style="--d:.45s">
+          <a href="#catalog" class="tl-btn">Смотреть каталог</a>
+          <a href="#heroes" class="tl-btn tl-ghost">Пять главных</a>
+        </div>
+      </div>
+      <ul class="hero-meta rise" style="--d:.6s" aria-label="Коротко о салоне" data-facts></ul>
+    </section>
+
+    <section class="heroes" id="heroes" aria-label="Главные машины" data-heroes></section>
+
+    <section class="paint" id="paint" aria-labelledby="paint-h">
+      <div class="paint-in">
+        <div class="paint-text">
+          <p class="eyebrow io">Цвет</p>
+          <h2 id="paint-h" class="io" style="--d:.05s">Выберите свой <em>оттенок ночи</em></h2>
+          <p class="lede io" style="--d:.1s">Шесть заводских цветов, которые мы принимаем в зал. Ни одного светлого.</p>
+          <div class="chips io" style="--d:.15s" role="group" aria-label="Оттенок кузова" data-chips></div>
+          <p class="paint-name io" style="--d:.2s"><span class="tl-mono" data-paint-name></span></p>
+        </div>
+        <div class="paint-media io" style="--d:.1s">
+          <img data-paint-img alt="Mercedes-AMG G 63 Brabus 900, выбранный оттенок" width="1920" height="1080" />
+          <img data-paint-img-next alt="" aria-hidden="true" width="1920" height="1080" />
+        </div>
+      </div>
+    </section>
+
+    <div id="tail" class="tail"></div>
+  </main>
+
+  <script src="data/cars.js"></script>
+  <script src="data/content.js"></script>
+  <script src="tail.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

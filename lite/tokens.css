@@ -1,0 +1,104 @@
+/* SCHWARZ: токены трёх тем. Один файл на site-3d и site-lite.
+   Переключение: <html data-theme="night" | "chrome" | "atelier">. По умолчанию night.
+   Правило: один акцент на тему, фон не чистый #000 и не #fff, mono только для лейблов. */
+
+:root,
+html[data-theme='night'] {
+  --bg: #0a0d18;
+  --bg-2: #10142a;
+  --surface: rgba(20, 24, 42, 0.72);
+  --ink: #f5f1e8;
+  --ink-dim: rgba(245, 241, 232, 0.62);
+  --ink-faint: rgba(245, 241, 232, 0.3);
+  --line: rgba(245, 241, 232, 0.12);
+  --accent: #d4a574;
+  --accent-soft: #f4d99c;
+  --accent-ink: #0a0d18;
+  --glass-top: rgba(255, 255, 255, 0.1);
+  --glass-bottom: rgba(0, 0, 0, 0.4);
+  --font-display: 'Prata', Georgia, serif;
+  --font-text: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.01em;
+  --display-case: none;
+  --radius: 18px;
+  --radius-s: 10px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.83, 0, 0.17, 1);
+  --photo-filter: sepia(0.35) saturate(1.3) hue-rotate(-10deg) brightness(0.82) contrast(1.08);
+  --scheme: dark;
+}
+
+html[data-theme='chrome'] {
+  --bg: #0a0a0b;
+  --bg-2: #141416;
+  --surface: rgba(26, 26, 28, 0.76);
+  --ink: #e6e6e8;
+  --ink-dim: rgba(230, 230, 232, 0.6);
+  --ink-faint: rgba(230, 230, 232, 0.28);
+  --line: rgba(230, 230, 232, 0.14);
+  --accent: #ff3b1f;
+  --accent-soft: #ff7a5c;
+  --accent-ink: #0a0a0b;
+  --glass-top: rgba(255, 255, 255, 0.14);
+  --glass-bottom: rgba(0, 0, 0, 0.5);
+  --font-display: 'Tektur', 'Geologica', sans-serif;
+  --font-text: 'Geologica', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --display-weight: 800;
+  --display-tracking: -0.03em;
+  --display-case: uppercase;
+  --radius: 4px;
+  --radius-s: 2px;
+  --photo-filter: grayscale(1) contrast(1.18) brightness(0.9);
+  --scheme: dark;
+}
+
+html[data-theme='atelier'] {
+  --bg: #f1ece2;
+  --bg-2: #e6dfd1;
+  --surface: rgba(255, 252, 246, 0.72);
+  --ink: #14130f;
+  --ink-dim: rgba(20, 19, 15, 0.64);
+  --ink-faint: rgba(20, 19, 15, 0.34);
+  --line: rgba(20, 19, 15, 0.12);
+  --accent: #b8703a;
+  --accent-soft: #d99a64;
+  --accent-ink: #fffaf0;
+  --glass-top: rgba(255, 255, 255, 0.7);
+  --glass-bottom: rgba(20, 19, 15, 0.08);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-text: 'Onest', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.015em;
+  --display-case: none;
+  --radius: 24px;
+  --radius-s: 12px;
+  --photo-filter: sepia(0.18) saturate(1.05) brightness(1.02) contrast(1.04);
+  --scheme: light;
+}
+
+/* ритм и размеры, одинаковые для всех тем */
+:root {
+  --maxw: 1440px;
+  --pad: clamp(18px, 4vw, 64px);
+  --gap: clamp(1rem, 2vw, 1.5rem);
+  --section: clamp(4rem, 9vw, 8rem);
+  --t-fast: 0.28s var(--ease);
+  --t-med: 0.6s var(--ease);
+  --h1: clamp(2.6rem, 7.2vw, 7.5rem);
+  --h2: clamp(2rem, 4.4vw, 4rem);
+  --h3: clamp(1.25rem, 1.8vw, 1.6rem);
+  --lede: clamp(1.05rem, 1.35vw, 1.3rem);
+  --label: 0.72rem;
+}
+
+html { color-scheme: var(--scheme); }
+
+/* шрифты: подключаются один раз, тема выбирает свои через переменные */
+.schwarz-fonts {
+  /* Prata 400 · Manrope 400 500 600 700 · Tektur 500 700 800 · Geologica 300 400 500 600 ·
+     Cormorant Garamond 400 500 600 (+italic) · Onest 400 500 600 · JetBrains Mono 400 500 */
+}
