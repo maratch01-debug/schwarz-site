@@ -44,28 +44,80 @@
   var imgs = $('[data-hero-imgs]')
   var pick = $('[data-hero-pick]')
   var capName = $('[data-hero-name]')
-  var capPrice = $('[data-hero-price]')
+  var capNums = $('[data-hero-nums]')
+  var model = $('[data-hero-model]')
+  var scene = $('[data-hero-scene]')
   var hi = -1
   var timer = 0
+  var AUTO = 5200
+  // машина на сцене: вырезка, блик по кузову (маска = сама вырезка), отражение на полу;
+  // --ar из реального размера, чтобы машина и отражение легли под колёса
   imgs.innerHTML = heroes.map(function (c, i) {
-    return '<img src="' + esc(c.photos.cutout) + '" alt="' + esc(c.brand + ' ' + c.name + ', ' + c.color.name) + '"' + (i === 0 ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async" width="1800" height="900">'
+    var src = esc(c.photos.cutout)
+    return '<div class="car-shot" data-shot>' +
+      '<img class="car-img" src="' + src + '" alt="' + esc(c.brand + ' ' + c.name + ', ' + c.color.name) + '"' + (i === 0 ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async">' +
+      '<span class="car-sheen" aria-hidden="true"></span>' +
+      '<img class="car-refl" src="' + src + '" alt="" aria-hidden="true" loading="lazy" decoding="async">' +
+      '</div>'
   }).join('')
+  $$('[data-shot]', imgs).forEach(function (shot, k) {
+    var im = $('.car-img', shot)
+    var sheen = $('.car-sheen', shot)
+    // маска грузится в CORS-режиме: при открытии файлом (file://) браузер её блокирует, блик тогда не нужен
+    if (/^https?:$/.test(location.protocol)) {
+      var url = 'url("' + heroes[k].photos.cutout + '")'
+      sheen.style.webkitMaskImage = url
+      sheen.style.maskImage = url
+    } else sheen.remove()
+    function ar() { if (im.naturalWidth) shot.style.setProperty('--ar', (im.naturalWidth / im.naturalHeight).toFixed(4)) }
+    if (im.complete) ar(); else im.addEventListener('load', ar)
+  })
+  var pad2 = function (n) { return (n < 10 ? '0' : '') + n }
+  var heroTotal = $('[data-hero-total]')
+  var heroNum = $('[data-hero-num]')
+  if (heroTotal) heroTotal.textContent = pad2(heroes.length)
   pick.innerHTML = heroes.map(function (c, i) {
-    return '<button type="button" role="tab" aria-selected="false" data-hero="' + i + '">' + esc(c.name) + '</button>'
+    return '<button type="button" role="tab" aria-selected="false" data-hero="' + i + '"><i>' + pad2(i + 1) + '</i>' + esc(c.name) + '</button>'
   }).join('')
+
+  // огромное имя модели за машиной: «GT 63 Coupé» → «GT 63», «911 Carrera S» → «911», «M5» → «M5»
+  function badge(name) {
+    var t = String(name).split(' ')
+    return t[1] && /^\d/.test(t[1]) ? t[0] + ' ' + t[1] : t[0]
+  }
+  function setModel(text) {
+    var old = $$('.mw', model)
+    old.forEach(function (w) {
+      w.classList.add('is-out')
+      setTimeout(function () { if (w.parentNode) w.parentNode.removeChild(w) }, reduced ? 0 : 1100)
+    })
+    var w = document.createElement('span')
+    w.className = 'mw'
+    w.innerHTML = text.split('').map(function (ch, k) {
+      return ch === ' ' ? '<i class="sp"></i>' : '<b style="--k:' + k + '"><span>' + esc(ch) + '</span></b>'
+    }).join('')
+    model.appendChild(w)
+  }
+  var fmt = function (v) { return esc(String(v).replace('.', ',')) }
+
   function showHero(i, user) {
     if (i === hi) return
-    $$('img', imgs).forEach(function (im, k) {
+    $$('[data-shot]', imgs).forEach(function (im, k) {
       im.classList.remove('is-out')
       if (k === hi) im.classList.add('is-out')
       im.classList.toggle('is-on', k === i)
     })
     $$('[data-hero]', pick).forEach(function (b, k) { b.setAttribute('aria-selected', String(k === i)) })
     var c = heroes[i]
-    capName.textContent = c.brand + ' ' + c.name
-    capPrice.innerHTML = 'от <b>' + T.money(c.rent.day) + '</b> в сутки · ' + esc(c.power_hp) + ' л.с.'
+    setModel(badge(c.name))
+    capName.innerHTML = esc(c.brand) + ' ' + esc(c.name) + ' <span>· ' + esc(c.color.name) + '</span>'
+    capNums.innerHTML =
+      '<div><dt>Мощность</dt><dd>' + fmt(c.power_hp) + '<small>л.с.</small></dd></div>' +
+      '<div><dt>0-100 км/ч</dt><dd>' + fmt(c.accel_0_100) + '<small>с</small></dd></div>' +
+      '<div class="is-price"><dt>Сутки от</dt><dd>' + T.money(c.rent.day).replace(/\s?₽/, '') + '<small>₽</small></dd></div>'
+    if (heroNum) heroNum.textContent = pad2(i + 1)
     hi = i
-    if (user) { clearInterval(timer); timer = 0 }
+    if (user) { clearInterval(timer); timer = 0; pick.classList.remove('is-auto') }
   }
   pick.addEventListener('click', function (e) {
     var b = e.target.closest('[data-hero]')
@@ -73,7 +125,25 @@
   })
   showHero(0)
   if (!reduced && heroes.length > 1) {
-    timer = setInterval(function () { if (!document.hidden) showHero((hi + 1) % heroes.length) }, 5200)
+    pick.classList.add('is-auto')
+    timer = setInterval(function () { if (!document.hidden) showHero((hi + 1) % heroes.length) }, AUTO)
+  }
+
+  // глубина: буквы и машина чуть расходятся за курсором (только мышь, без reduced-motion)
+  if (!reduced && scene && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var tx = 0, ty = 0, px = 0, py = 0, raf = 0
+    var tick = function () {
+      px += (tx - px) * 0.06
+      py += (ty - py) * 0.06
+      scene.style.setProperty('--px', px.toFixed(4))
+      scene.style.setProperty('--py', py.toFixed(4))
+      raf = Math.abs(tx - px) + Math.abs(ty - py) > 0.001 ? requestAnimationFrame(tick) : 0
+    }
+    $('.hero').addEventListener('pointermove', function (e) {
+      tx = e.clientX / window.innerWidth * 2 - 1
+      ty = e.clientY / window.innerHeight * 2 - 1
+      if (!raf) raf = requestAnimationFrame(tick)
+    })
   }
 
   /* ── панель дат в hero ── */
@@ -136,7 +206,7 @@
     note()
   })
   window.addEventListener('schwarz:edit-dates', function () {
-    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
+    booker.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' })
     setTimeout(function () { bkFrom.focus({ preventScroll: true }) }, reduced ? 0 : 650)
   })
 
@@ -158,6 +228,7 @@
       var y = window.scrollY
       if (!menuOpen) nav.classList.toggle('is-hidden', y > 160 && y > lastY + 2)
       if (y < lastY - 2) nav.classList.remove('is-hidden')
+      nav.classList.toggle('is-scrolled', y > 24)
       lastY = y
       ticking = false
     })

@@ -21,7 +21,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,600..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="tokens.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="tail.css" />
@@ -70,52 +70,58 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-word" aria-hidden="true">SCHWARZ</div>
-      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-light" aria-hidden="true"></div>
 
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="pill reveal" style="--d:.05s"><span class="dot" aria-hidden="true"></span><span data-hero-eyebrow>Москва · 16 машин · подача от 60 минут</span></p>
-          <h1 id="hero-title" class="reveal" style="--d:.12s">Аренда немецких машин. <em>Только тёмные.</em></h1>
-          <p class="lede reveal" style="--d:.2s" data-hero-lede>Mercedes-AMG, Maybach, BMW M, Porsche и Audi RS. Цена за сутки открыта, КАСКО включено, машину привезём к дому или к трапу.</p>
-        </div>
-
-        <figure class="hero-car" data-hero-stage>
-          <div class="hero-car-img" data-hero-imgs></div>
-          <figcaption class="hero-cap" aria-live="polite">
-            <span class="hero-cap-name" data-hero-name></span>
-            <span class="hero-cap-price" data-hero-price></span>
-          </figcaption>
+      <div class="hero-scene" data-hero-scene>
+        <div class="hero-wall" aria-hidden="true"><span class="hero-sweep"></span></div>
+        <div class="hero-model" aria-hidden="true" data-hero-model></div>
+        <figure class="hero-stage" data-hero-stage>
+          <div class="hero-floor" aria-hidden="true"></div>
+          <div class="hero-cars" data-hero-imgs></div>
         </figure>
-
-        <div class="hero-pick reveal" style="--d:.35s" role="tablist" aria-label="Машина на обложке" data-hero-pick></div>
       </div>
 
-      <form class="booker reveal" style="--d:.42s" aria-label="Подбор по датам" data-booker novalidate>
-        <div class="booker-in">
-          <label class="bk-field bk-car">
-            <span class="bk-label">Автомобиль</span>
-            <select name="car" data-bk-car><option value="">Любой из парка</option></select>
-          </label>
-          <label class="bk-field">
-            <span class="bk-label">Получение</span>
-            <span class="bk-row"><input type="date" name="from" required data-bk-from /><input type="time" name="fromTime" value="10:00" step="1800" aria-label="Время получения" /></span>
-          </label>
-          <label class="bk-field">
-            <span class="bk-label">Возврат</span>
-            <span class="bk-row"><input type="date" name="to" required data-bk-to /><input type="time" name="toTime" value="10:00" step="1800" aria-label="Время возврата" /></span>
-          </label>
-          <label class="bk-field bk-place">
-            <span class="bk-label">Где забрать</span>
-            <select name="place" data-bk-place></select>
-          </label>
-          <button type="submit" class="btn btn-primary bk-go">
-            <span data-bk-cta>Показать цены</span>
-            <span class="btn-ico" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" /></svg></span>
-          </button>
+      <div class="hero-foot">
+        <h1 id="hero-title" class="hero-title reveal" style="--d:.05s">Аренда немецких машин <em>в&nbsp;Москве</em></h1>
+        <div class="hero-spec reveal" style="--d:.2s" aria-live="polite">
+          <p class="hero-spec-name" data-hero-name></p>
+          <dl class="hero-spec-nums" data-hero-nums></dl>
         </div>
-        <p class="bk-note" data-bk-note aria-live="polite"></p>
-      </form>
+      </div>
+
+      <div class="hero-pick reveal" style="--d:.3s" role="tablist" aria-label="Машина на обложке" data-hero-pick></div>
+      <p class="eyebrow hero-eyebrow reveal" style="--d:.35s"><span data-hero-eyebrow>Москва · 16 машин · подача от 60 минут</span></p>
+    </section>
+
+    <section class="bookband" aria-label="Подбор по датам">
+      <div class="bookband-in">
+        <p class="lede" data-hero-lede>Mercedes-AMG, Maybach, BMW M, Porsche и Audi RS. Цена за сутки открыта, КАСКО включено, машину привезём к дому или к трапу.</p>
+        <form class="booker" aria-label="Подбор по датам" data-booker novalidate>
+          <div class="booker-in">
+            <label class="bk-field bk-car">
+              <span class="bk-label">Автомобиль</span>
+              <select name="car" data-bk-car><option value="">Любой из парка</option></select>
+            </label>
+            <label class="bk-field">
+              <span class="bk-label">Получение</span>
+              <span class="bk-row"><input type="date" name="from" required data-bk-from /><input type="time" name="fromTime" value="10:00" step="1800" aria-label="Время получения" /></span>
+            </label>
+            <label class="bk-field">
+              <span class="bk-label">Возврат</span>
+              <span class="bk-row"><input type="date" name="to" required data-bk-to /><input type="time" name="toTime" value="10:00" step="1800" aria-label="Время возврата" /></span>
+            </label>
+            <label class="bk-field bk-place">
+              <span class="bk-label">Где забрать</span>
+              <select name="place" data-bk-place></select>
+            </label>
+            <button type="submit" class="btn btn-primary bk-go">
+              <span data-bk-cta>Показать цены</span>
+              <span class="btn-ico" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" /></svg></span>
+            </button>
+          </div>
+          <p class="bk-note" data-bk-note aria-live="polite"></p>
+        </form>
+      </div>
     </section>
 
     <section class="facts" aria-label="Коротко о сервисе">

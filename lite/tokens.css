@@ -1,31 +1,33 @@
-/* SCHWARZ v2: аренда немецких машин. Токены трёх тем, один файл на site-lite и site-3d.
-   Переключение: <html data-theme="night" | "chrome" | "atelier">, по умолчанию night.
-   Шрифты: Geist (заголовки и текст) + Playfair Display italic (одно акцентное слово) + Geist Mono (цифры, лейблы).
+/* SCHWARZ v3: аренда немецких машин. Токены трёх тем, один файл на site-lite и site-3d.
+   Переключение: <html data-theme="night" | "chrome" | "atelier">, по умолчанию night (главная, полируется первой).
+   Шрифты v3: Sofia Sans Extra Condensed 800 капсом (заголовки, курсив = акцент) + Geist (текст) + Geist Mono (цифры, лейблы).
+   Формы v3: острые углы (4-10px), как у немецких марок, без пилюль.
    Подключение:
-   https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap */
+   https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,600..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap */
 
 :root,
 html[data-theme='night'] {
-  --bg: #0b0b0d;
-  --bg-2: #101013;
-  --bg-3: #16161a;
-  --surface: rgba(22, 22, 26, 0.72);
-  --stage-1: #1b1b20;
-  --stage-2: #0d0d10;
-  --ink: #f3f1ec;
-  --ink-dim: rgba(243, 241, 236, 0.64);
-  --ink-faint: rgba(243, 241, 236, 0.38);
-  --line: rgba(243, 241, 236, 0.09);
-  --line-strong: rgba(243, 241, 236, 0.16);
-  --accent: #d9b27c;
-  --accent-soft: #ecd3ac;
-  --accent-ink: #141008;
-  --accent-wash: rgba(217, 178, 124, 0.12);
-  --glass-top: rgba(255, 255, 255, 0.08);
+  --bg: #09090a;
+  --bg-2: #0e0e10;
+  --bg-3: #141416;
+  --surface: rgba(20, 20, 22, 0.74);
+  --stage-1: #1c1b1a;
+  --stage-2: #0b0b0c;
+  --ink: #eeebe5;
+  --ink-dim: rgba(238, 235, 229, 0.62);
+  --ink-faint: rgba(238, 235, 229, 0.36);
+  --line: rgba(238, 235, 229, 0.09);
+  --line-strong: rgba(238, 235, 229, 0.17);
+  --accent: #d5b88e;
+  --accent-soft: #e8d3b2;
+  --accent-ink: #15110b;
+  --accent-wash: rgba(213, 184, 142, 0.1);
+  --light: 255, 238, 214; /* тёплый свет студии: rgba(var(--light), a) */
+  --glass-top: rgba(255, 255, 255, 0.07);
   --glass-bottom: rgba(0, 0, 0, 0.45);
-  --shadow-tint: 8, 8, 10;
-  --car-shadow: rgba(0, 0, 0, 0.75);
-  --photo-filter: saturate(0.92) contrast(1.04) brightness(0.92);
+  --shadow-tint: 4, 4, 5;
+  --car-shadow: rgba(0, 0, 0, 0.9);
+  --photo-filter: saturate(0.8) contrast(1.06) brightness(0.94);
   --scheme: dark;
 }
 
@@ -45,6 +47,7 @@ html[data-theme='chrome'] {
   --accent-soft: #f07c69;
   --accent-ink: #fff6f4;
   --accent-wash: rgba(229, 80, 58, 0.12);
+  --light: 230, 236, 245;
   --glass-top: rgba(255, 255, 255, 0.1);
   --glass-bottom: rgba(0, 0, 0, 0.5);
   --shadow-tint: 6, 6, 8;
@@ -69,6 +72,7 @@ html[data-theme='atelier'] {
   --accent-soft: #c2875a;
   --accent-ink: #fffaf2;
   --accent-wash: rgba(154, 91, 44, 0.1);
+  --light: 255, 255, 255;
   --glass-top: rgba(255, 255, 255, 0.85);
   --glass-bottom: rgba(23, 21, 15, 0.06);
   --shadow-tint: 60, 48, 30;
@@ -79,18 +83,20 @@ html[data-theme='atelier'] {
 
 /* общее для всех тем */
 :root {
-  --font-display: 'Geist', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Sofia Sans Extra Condensed', 'Arial Narrow', sans-serif;
   --font-text: 'Geist', 'Segoe UI', system-ui, sans-serif;
-  --font-accent: 'Playfair Display', Georgia, serif;
+  /* акцентное слово = тот же дисплейный, курсивом (скорость), а не чужой serif */
+  --font-accent: 'Sofia Sans Extra Condensed', 'Arial Narrow', sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
-  --display-weight: 500;
-  --display-tracking: -0.045em;
-  --display-case: none;
+  --display-weight: 800;
+  --display-tracking: -0.004em;
+  --display-case: uppercase;
+  --display-leading: 0.86;
 
-  --radius: 28px;
-  --radius-m: 20px;
-  --radius-s: 12px;
-  --bezel: 6px;
+  --radius: 10px;
+  --radius-m: 8px;
+  --radius-s: 4px;
+  --bezel: 0px;
 
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -102,16 +108,16 @@ html[data-theme='atelier'] {
   --maxw: 1440px;
   --pad: clamp(16px, 4vw, 64px);
   --gap: clamp(14px, 1.6vw, 24px);
-  --section: clamp(5rem, 11vw, 10rem);
+  --section: clamp(5rem, 10vw, 9rem);
 
-  --h1: clamp(2.6rem, 5.6vw, 5.6rem);
-  --h2: clamp(2.1rem, 4.4vw, 4.4rem);
-  --h3: clamp(1.2rem, 1.6vw, 1.5rem);
-  --lede: clamp(1.02rem, 1.25vw, 1.2rem);
-  --label: 0.72rem;
+  --h1: clamp(3.4rem, 8vw, 8.4rem);
+  --h2: clamp(2.9rem, 6.2vw, 6.4rem);
+  --h3: clamp(1.5rem, 2vw, 1.9rem);
+  --lede: clamp(1.02rem, 1.2vw, 1.15rem);
+  --label: 0.7rem;
 
-  --shadow-soft: 0 30px 60px -30px rgba(var(--shadow-tint), 0.55), 0 2px 6px -2px rgba(var(--shadow-tint), 0.25);
-  --shadow-lift: 0 40px 80px -36px rgba(var(--shadow-tint), 0.7), 0 4px 12px -4px rgba(var(--shadow-tint), 0.3);
+  --shadow-soft: 0 30px 60px -30px rgba(var(--shadow-tint), 0.6), 0 2px 6px -2px rgba(var(--shadow-tint), 0.3);
+  --shadow-lift: 0 40px 80px -36px rgba(var(--shadow-tint), 0.75), 0 4px 12px -4px rgba(var(--shadow-tint), 0.35);
 }
 
 html { color-scheme: var(--scheme); }

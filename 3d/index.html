@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru" data-theme="night">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SCHWARZ. Аренда немецких машин в Москве</title>
+  <meta name="description" content="Аренда Mercedes-AMG, Maybach, BMW M, Porsche и Audi RS в Москве. Только тёмные машины, цена за сутки открыта, подача по Москве и в аэропорты." />
+  <meta name="theme-color" content="#09090a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090a'/%3E%3Cpath d='M20.6 11.2c-.9-1.5-2.6-2.4-4.7-2.4-2.9 0-4.8 1.6-4.8 3.8 0 4.9 9.4 3 9.4 7.4 0 1.6-1.6 3.1-4.4 3.1-2.2 0-3.9-1-4.8-2.6' fill='none' stroke='%23eeebe5' stroke-width='2.2' stroke-linecap='round'/%3E%3Crect x='23' y='21' width='3.4' height='3.4' fill='%23d5b88e'/%3E%3C/svg%3E" />
+  <script>
+    ;(function () {
+      document.documentElement.classList.add('js')
+      // фильм всегда с первого кадра
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    })()
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,600..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/podium-Chi8Wpln.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/three-CCIRaR1s.js">
+  <link rel="modulepreload" crossorigin href="./assets/gsap-CiEuWA-R.js">
+  <link rel="modulepreload" crossorigin href="./assets/cars-mhTEZu3v.js">
+  <link rel="stylesheet" crossorigin href="./assets/cars-Co0zjNIB.css">
+  <link rel="stylesheet" crossorigin href="./assets/podium-B7W1halt.css">
+</head>
+<body>
+  <a href="#fleet" class="skip">Перейти к автопарку</a>
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <!-- прелоадер: честный прогресс моделей и шрифтов -->
+  <div class="pre" data-pre aria-hidden="true">
+    <div class="pre-mark">Schwarz<i></i></div>
+    <div class="pre-foot">
+      <span data-pre-label>инициализация</span>
+      <span class="pre-num" data-pre-num>000</span>
+    </div>
+    <div class="pre-bar"><i data-pre-bar></i></div>
+  </div>
+
+  <header class="nav" data-nav>
+    <div class="nav-in">
+      <a href="#top" class="logo" aria-label="SCHWARZ, наверх">Schwarz<i aria-hidden="true"></i></a>
+      <nav class="nav-links" aria-label="Разделы">
+        <a href="#fleet">Автопарк</a>
+        <a href="#how">Как арендовать</a>
+        <a href="#terms">Условия</a>
+        <a href="#services">Услуги</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <a href="tel:+74950000000" class="nav-phone">+7 495 000-00-00</a>
+      <a href="#booking" class="btn btn-primary btn-sm nav-cta">
+        <span>Забронировать</span>
+        <span class="btn-ico" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- интерфейс поверх сцены -->
+  <div class="hud" data-hud>
+    <div class="hud-pick" role="list" aria-label="Машины в фильме" data-pick></div>
+    <p class="eyebrow hud-eyebrow" data-hud-eyebrow>Москва · 16 машин · подача от 60 минут</p>
+
+    <div class="hud-foot">
+      <h1 class="hud-title" id="top">Аренда немецких машин <em>в&nbsp;Москве</em></h1>
+      <div class="hud-spec" aria-live="polite">
+        <p class="hud-spec-name" data-spec-name></p>
+        <dl class="hud-spec-nums" data-spec-nums></dl>
+      </div>
+    </div>
+
+    <div class="hud-rail" aria-hidden="true"><i data-rail></i></div>
+    <p class="hud-hint" data-hint aria-hidden="true">Листайте, машина повернётся</p>
+
+    <!-- выноски к точкам кузова: появляются по одной -->
+    <svg class="co-lines" aria-hidden="true"><line data-co-line x1="0" y1="0" x2="0" y2="0" /></svg>
+    <div class="co" data-co aria-hidden="true">
+      <i class="co-dot" data-co-dot></i>
+      <div class="co-body" data-co-body></div>
+    </div>
+
+    <div class="hud-end" data-end>
+      <p class="hud-end-k" data-end-k></p>
+      <p class="hud-end-price" data-end-price></p>
+      <div class="hud-end-act">
+        <a href="#booking" class="btn btn-primary" data-end-cta><span>Выбрать даты</span><span class="btn-ico" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" /></svg></span></a>
+        <a href="#fleet" class="btn btn-ghost"><span>Весь автопарк</span></a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- скролл фильма: высота задаёт длину главы -->
+    <section class="film" data-film aria-label="Mercedes-AMG G 63 на подиуме"></section>
+    <div class="tail-wrap"><div data-tail></div></div>
+  </main>
+
+</body>
+</html>
